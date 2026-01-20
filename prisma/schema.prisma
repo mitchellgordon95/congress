@@ -1,0 +1,132 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
+}
+
+// Members of Congress
+model Member {
+  id                 String              @id @default(uuid())
+  bioguideId         String              @unique @map("bioguide_id")
+  firstName          String              @map("first_name")
+  lastName           String              @map("last_name")
+  party              String              // 'D', 'R', 'I'
+  state              String
+  chamber            String              // 'senate', 'house'
+  photoUrl           String?             @map("photo_url")
+  isCurrent          Boolean             @default(true) @map("is_current")
+  createdAt          DateTime            @default(now()) @map("created_at")
+  updatedAt          DateTime            @updatedAt @map("updated_at")
+  messages           Message[]
+  transcriptSegments TranscriptSegment[]
+
+  @@map("members")
+}
+
+// Floor sessions and committee hearings
+model Session {
+  id                 String              @id @default(uuid())
+  sessionType        String              @map("session_type") // 'floor_senate', 'floor_house', 'committee'
+  sessionDate        DateTime            @map("session_date") @db.Date
+  title              String?
+  govinfoPackageId   String?             @map("govinfo_package_id")
+  chamber            String?             // 'senate', 'house'
+  committeeCode      String?             @map("committee_code")
+  startTime          DateTime?           @map("start_time")
+  endTime            DateTime?           @map("end_time")
+  status             String              @default("pending") // 'pending', 'processing', 'complete'
+  rawTranscriptUrl   String?             @map("raw_transcript_url")
+  createdAt          DateTime            @default(now()) @map("created_at")
+  agendaItems        AgendaItem[]
+  messages           Message[]
+  transcriptSegments TranscriptSegment[]
+  hearingWitnesses   HearingWitness[]
+
+  @@index([sessionDate(sort: Desc)])
+  @@index([sessionType])
+  @@map("sessions")
+}
+
+// Agenda items within a session
+model AgendaItem {
+  id         String    @id @default(uuid())
+  sessionId  String    @map("session_id")
+  session    Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  title      String?
+  itemType   String    @map("item_type") // 'bill', 'resolution', 'motion', 'tribute', 'nomination'
+  billNumber String?   @map("bill_number")
+  billUrl    String?   @map("bill_url")
+  startOrder Int       @map("start_order")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  messages   Message[]
+
+  @@index([sessionId])
+  @@map("agenda_items")
+}
+
+// Translated chat messages
+model Message {
+  id                 String              @id @default(uuid())
+  sessionId          String              @map("session_id")
+  session            Session             @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  agendaItemId       String?             @map("agenda_item_id")
+  agendaItem         AgendaItem?         @relation(fields: [agendaItemId], references: [id])
+  memberId           String?             @map("member_id")
+  member             Member?             @relation(fields: [memberId], references: [id])
+  messageType        String              @map("message_type") // 'speech', 'procedural', 'question', 'answer', 'system', 'vote_result'
+  content            String
+  originalExcerpt    String?             @map("original_excerpt")
+  originalPage       String?             @map("original_page")
+  timestampInSession DateTime?           @map("timestamp_in_session")
+  displayOrder       Int                 @map("display_order")
+  createdAt          DateTime            @default(now()) @map("created_at")
+  transcriptSegments TranscriptSegment[]
+
+  @@index([sessionId])
+  @@index([memberId])
+  @@map("messages")
+}
+
+// Full original transcript segments (for Q&A feature)
+model TranscriptSegment {
+  id           String                    @id @default(uuid())
+  sessionId    String                    @map("session_id")
+  session      Session                   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  messageId    String?                   @map("message_id")
+  message      Message?                  @relation(fields: [messageId], references: [id])
+  memberId     String?                   @map("member_id")
+  member       Member?                   @relation(fields: [memberId], references: [id])
+  originalText String                    @map("original_text")
+  pageNumber   String?                   @map("page_number")
+  embedding    Unsupported("vector(1536)")?
+  createdAt    DateTime                  @default(now()) @map("created_at")
+
+  @@map("transcript_segments")
+}
+
+// Witnesses for committee hearings
+model Witness {
+  id               String           @id @default(uuid())
+  name             String
+  title            String?
+  organization     String?
+  createdAt        DateTime         @default(now()) @map("created_at")
+  hearingWitnesses HearingWitness[]
+
+  @@map("witnesses")
+}
+
+model HearingWitness {
+  sessionId String  @map("session_id")
+  session   Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  witnessId String  @map("witness_id")
+  witness   Witness @relation(fields: [witnessId], references: [id], onDelete: Cascade)
+
+  @@id([sessionId, witnessId])
+  @@map("hearing_witnesses")
+}
