@@ -1,12 +1,10 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["postgresqlExtensions"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider   = "postgresql"
-  url        = env("DATABASE_URL")
-  extensions = [vector]
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 // Members of Congress
@@ -94,17 +92,16 @@ model Message {
 
 // Full original transcript segments (for Q&A feature)
 model TranscriptSegment {
-  id           String                    @id @default(uuid())
-  sessionId    String                    @map("session_id")
-  session      Session                   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  messageId    String?                   @map("message_id")
-  message      Message?                  @relation(fields: [messageId], references: [id])
-  memberId     String?                   @map("member_id")
-  member       Member?                   @relation(fields: [memberId], references: [id])
-  originalText String                    @map("original_text")
-  pageNumber   String?                   @map("page_number")
-  embedding    Unsupported("vector(1536)")?
-  createdAt    DateTime                  @default(now()) @map("created_at")
+  id           String   @id @default(uuid())
+  sessionId    String   @map("session_id")
+  session      Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  messageId    String?  @map("message_id")
+  message      Message? @relation(fields: [messageId], references: [id])
+  memberId     String?  @map("member_id")
+  member       Member?  @relation(fields: [memberId], references: [id])
+  originalText String   @map("original_text")
+  pageNumber   String?  @map("page_number")
+  createdAt    DateTime @default(now()) @map("created_at")
 
   @@map("transcript_segments")
 }

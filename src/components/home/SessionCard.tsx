@@ -1,6 +1,6 @@
 'use client'
 
-import { format } from 'date-fns'
+import { format, formatDistanceToNow } from 'date-fns'
 
 interface SessionCardProps {
   id: string
@@ -9,6 +9,9 @@ interface SessionCardProps {
   title: string | null
   chamber: string | null
   messageCount: number
+  isLive?: boolean
+  currentSpeaker?: string | null
+  speakerCount?: number
 }
 
 export function SessionCard({
@@ -18,34 +21,58 @@ export function SessionCard({
   title,
   chamber,
   messageCount,
+  isLive = false,
+  currentSpeaker,
+  speakerCount = 0,
 }: SessionCardProps) {
   const date = typeof sessionDate === 'string' ? new Date(sessionDate) : sessionDate
-  const formattedDate = format(date, 'MMMM d, yyyy')
+  const timeAgo = formatDistanceToNow(date, { addSuffix: true })
 
-  const chamberLabel = chamber === 'senate' ? 'Senate' : chamber === 'house' ? 'House' : 'Congress'
-  const chamberColor = chamber === 'senate' ? 'text-[var(--democrat)]' : 'text-[var(--republican)]'
+  const isSenate = chamber === 'senate'
+  const chamberLabel = isSenate ? 'Senate Floor' : 'House Floor'
+  const chamberIcon = isSenate ? '\uD83D\uDD35' : '\uD83D\uDD34'
+  const borderColor = isSenate ? 'border-l-[var(--democrat)]' : 'border-l-[var(--republican)]'
 
   return (
     <a
       href={`/session/${id}`}
-      className="block border border-[var(--border)] rounded-lg p-4 hover:border-[var(--muted)] hover:shadow-sm transition-all"
+      className={`block border border-[var(--border)] ${borderColor} border-l-4 rounded-lg p-4 hover:bg-[var(--card)] transition-all`}
     >
-      <div className="flex items-start justify-between mb-2">
-        <span className={`text-sm font-semibold ${chamberColor}`}>
-          {chamberLabel} Floor
-        </span>
-        <span className="text-sm text-[var(--muted)]">
-          {formattedDate}
-        </span>
+      {/* Header row */}
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-2">
+          <span>{chamberIcon}</span>
+          <span className="font-semibold">{chamberLabel}</span>
+        </div>
+        <div className="flex items-center gap-2 text-sm">
+          {isLive ? (
+            <span className="flex items-center gap-1 text-red-500 font-medium">
+              <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+              LIVE
+              {speakerCount > 0 && <span className="text-[var(--muted)]">&#183; {speakerCount} speaking</span>}
+            </span>
+          ) : (
+            <span className="text-[var(--muted)]">Session ended</span>
+          )}
+        </div>
       </div>
 
-      <h3 className="font-medium mb-2 line-clamp-2">
-        {title || `${chamberLabel} Floor Session`}
-      </h3>
-
-      <p className="text-sm text-[var(--muted)]">
-        {messageCount} messages
+      {/* Title */}
+      <p className="text-[var(--muted)] mb-2 line-clamp-1">
+        "{title || `${chamberLabel} Session`}"
       </p>
+
+      {/* Footer */}
+      <div className="flex items-center justify-between text-sm text-[var(--muted)]">
+        <span>
+          {currentSpeaker ? (
+            <>{currentSpeaker} is speaking...</>
+          ) : (
+            <>{messageCount} messages</>
+          )}
+        </span>
+        <span>{timeAgo}</span>
+      </div>
     </a>
   )
 }

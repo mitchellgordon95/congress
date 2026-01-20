@@ -6,7 +6,7 @@ const anthropic = new Anthropic({
 })
 
 // Use Claude Sonnet for cost-effective quality
-const MODEL = 'claude-sonnet-4-5-20241022'
+const MODEL = 'claude-sonnet-4-20250514'
 
 export interface TranslationResult {
   messages: TranslatedMessage[]

@@ -21,6 +21,7 @@ interface Message {
   originalExcerpt?: string | null
   originalPage?: string | null
   displayOrder: number
+  createdAt?: Date | string
 }
 
 interface ChatThreadProps {
@@ -38,18 +39,31 @@ export function ChatThread({ messages, showOriginals = false }: ChatThreadProps)
   }
 
   return (
-    <div className="divide-y divide-[var(--border)]">
-      {messages.map((message) => (
-        <MessageBubble
-          key={message.id}
-          content={message.content}
-          messageType={message.messageType}
-          member={message.member}
-          originalPage={message.originalPage}
-          originalExcerpt={message.originalExcerpt}
-          showOriginal={showOriginals}
-        />
-      ))}
+    <div>
+      {messages.map((message, index) => {
+        // Generate pseudo-timestamp based on message order
+        // In a real app, this would come from the database
+        const baseTime = new Date()
+        baseTime.setHours(14, 30 + Math.floor(index / 3), (index % 3) * 20)
+        const timestamp = baseTime.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true,
+        }).toLowerCase()
+
+        return (
+          <MessageBubble
+            key={message.id}
+            content={message.content}
+            messageType={message.messageType}
+            member={message.member}
+            originalPage={message.originalPage}
+            originalExcerpt={message.originalExcerpt}
+            showOriginal={showOriginals}
+            timestamp={timestamp}
+          />
+        )
+      })}
     </div>
   )
 }
