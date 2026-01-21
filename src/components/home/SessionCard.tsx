@@ -59,14 +59,14 @@ export function SessionCard({
 
       {/* Title */}
       <p className="text-[var(--muted)] mb-2 line-clamp-1">
-        "{title || `${chamberLabel} Session`}"
+        {title || `${chamberLabel} Session`}
       </p>
 
       {/* Footer */}
       <div className="flex items-center justify-between text-sm text-[var(--muted)]">
         <span>
           {currentSpeaker ? (
-            <>{currentSpeaker} is speaking...</>
+            isLive ? <>{currentSpeaker} is speaking...</> : <>{currentSpeaker} spoke</>
           ) : (
             <>{messageCount} messages</>
           )}

@@ -22,14 +22,7 @@ export default function RootLayout({
                 <span>&#127963;</span>
                 Congress Chat
               </a>
-              <div className="flex items-center gap-4">
-                <button className="text-[var(--muted)] hover:text-[var(--foreground)]">
-                  &#128276;
-                </button>
-                <button className="text-[var(--muted)] hover:text-[var(--foreground)]">
-                  &#9881;
-                </button>
-              </div>
+              {/* Placeholder for future notification/settings buttons */}
             </nav>
           </header>
 
