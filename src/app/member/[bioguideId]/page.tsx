@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/db'
 import { notFound } from 'next/navigation'
 import { MemberAvatar } from '@/components/member/MemberAvatar'
-import { format } from 'date-fns'
+import { formatSessionDate } from '@/lib/date-utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -104,7 +104,7 @@ export default async function MemberPage({ params }: PageProps) {
                     {message.session.sessionType === 'floor_senate' ? 'Senate' : 'House'} Floor
                   </span>
                   <span className="text-sm text-[var(--muted)]">
-                    {format(new Date(message.session.sessionDate), 'MMM d, yyyy')}
+                    {formatSessionDate(message.session.sessionDate, 'MMM d, yyyy')}
                   </span>
                 </div>
                 <p className="line-clamp-2">{message.content}</p>

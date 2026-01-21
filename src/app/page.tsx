@@ -25,23 +25,32 @@ export default async function HomePage() {
     },
   })
 
-  // Get recent activity (last 10 messages across all sessions)
-  const recentMessages = await prisma.message.findMany({
+  // Get recent activity - unique speakers per session
+  const allRecentMessages = await prisma.message.findMany({
     where: {
       member: { isNot: null },
       messageType: 'speech',
     },
     orderBy: { createdAt: 'desc' },
-    take: 5,
+    take: 50, // Fetch more to find unique speaker-session combinations
     include: {
       member: {
-        select: { firstName: true, lastName: true, party: true, chamber: true },
+        select: { firstName: true, lastName: true, party: true, chamber: true, bioguideId: true },
       },
       session: {
-        select: { title: true, chamber: true },
+        select: { id: true, title: true, chamber: true },
       },
     },
   })
+
+  // Deduplicate by member+session combination
+  const seenKeys = new Set<string>()
+  const recentMessages = allRecentMessages.filter(msg => {
+    const key = `${msg.member?.bioguideId}-${msg.session?.id}`
+    if (seenKeys.has(key)) return false
+    seenKeys.add(key)
+    return true
+  }).slice(0, 5)
 
   // Separate Senate and House sessions
   const senateSessions = sessions.filter(s => s.chamber === 'senate')

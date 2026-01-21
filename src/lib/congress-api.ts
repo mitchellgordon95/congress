@@ -28,25 +28,9 @@ export class CongressApiClient {
    * Fetch all current members of Congress
    */
   async getAllMembers(): Promise<CongressMemberDetail[]> {
-    const members: CongressMemberDetail[] = []
-
-    // Fetch Senate members
-    const senateMembersRaw = await this.fetchChamberMembers('senate')
-    members.push(...senateMembersRaw.map(m => this.transformMember(m, 'senate')))
-
-    // Fetch House members
-    const houseMembersRaw = await this.fetchChamberMembers('house')
-    members.push(...houseMembersRaw.map(m => this.transformMember(m, 'house')))
-
-    return members
-  }
-
-  /**
-   * Fetch members from a specific chamber
-   */
-  private async fetchChamberMembers(chamber: 'senate' | 'house'): Promise<CongressMember[]> {
     const members: CongressMember[] = []
-    let url = `${CONGRESS_API_BASE_URL}/member?chamber=${chamber}&currentMember=true&limit=250&api_key=${this.apiKey}`
+    // Fetch all current members (chamber filter in API doesn't work correctly)
+    let url = `${CONGRESS_API_BASE_URL}/member?currentMember=true&limit=250&api_key=${this.apiKey}`
 
     while (url) {
       const response = await fetch(url)
@@ -61,17 +45,23 @@ export class CongressApiClient {
       url = data.pagination?.next ? `${data.pagination.next}&api_key=${this.apiKey}` : ''
     }
 
-    return members
+    // Transform and determine chamber from terms data
+    return members.map(m => this.transformMember(m))
   }
 
   /**
    * Transform API response to our member format
    */
-  private transformMember(member: CongressMember, chamber: 'senate' | 'house'): CongressMemberDetail {
+  private transformMember(member: CongressMember): CongressMemberDetail {
     // Parse name - format is usually "LastName, FirstName"
     const nameParts = member.name.split(', ')
     const lastName = nameParts[0] || ''
     const firstName = nameParts[1]?.split(' ')[0] || ''
+
+    // Determine chamber from terms data
+    const currentTerm = member.terms?.item?.[0]
+    const chamberFromTerms = currentTerm?.chamber?.toLowerCase() || ''
+    const chamber: 'senate' | 'house' = chamberFromTerms.includes('senate') ? 'senate' : 'house'
 
     // Map party name to abbreviation
     let party: 'D' | 'R' | 'I' = 'I'
@@ -108,22 +98,15 @@ export class CongressApiClient {
     const data = await response.json()
     const member = data.member
 
-    // Determine chamber from terms
-    const currentTerm = member.terms?.item?.find((t: { endYear?: number }) => !t.endYear)
-    const chamber = currentTerm?.chamber?.toLowerCase() === 'senate' ? 'senate' : 'house'
-
-    return this.transformMember(
-      {
-        bioguideId: member.bioguideId,
-        name: `${member.lastName}, ${member.firstName}`,
-        partyName: member.partyName,
-        state: member.state,
-        district: member.district,
-        terms: member.terms,
-        depiction: member.depiction,
-      },
-      chamber
-    )
+    return this.transformMember({
+      bioguideId: member.bioguideId,
+      name: `${member.lastName}, ${member.firstName}`,
+      partyName: member.partyName,
+      state: member.state,
+      district: member.district,
+      terms: member.terms,
+      depiction: member.depiction,
+    })
   }
 
   /**

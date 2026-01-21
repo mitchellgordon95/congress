@@ -1,8 +1,8 @@
 import { prisma } from '@/lib/db'
 import { notFound } from 'next/navigation'
-import { format } from 'date-fns'
 import { ChatThread } from '@/components/chat/ChatThread'
 import { SessionSidebar } from '@/components/chat/SessionSidebar'
+import { formatSessionDate } from '@/lib/date-utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -44,10 +44,14 @@ export default async function SessionPage({ params }: PageProps) {
 
   const chamberLabel = session.chamber === 'senate' ? 'Senate' : 'House'
   const chamberIcon = session.chamber === 'senate' ? '\uD83D\uDD35' : '\uD83D\uDD34'
-  const formattedDate = format(new Date(session.sessionDate), 'MMMM d, yyyy')
+  const formattedDate = formatSessionDate(session.sessionDate)
 
-  // Get first agenda item for the "Floor Item" card
-  const currentAgendaItem = session.agendaItems[0]
+  // Get first meaningful agenda item for the "Floor Item" card
+  // Skip generic chamber titles
+  const genericTitles = ['House of Representatives', 'Senate', 'Senate Chamber']
+  const currentAgendaItem = session.agendaItems.find(
+    item => !genericTitles.includes(item.title)
+  ) || session.agendaItems[0]
 
   // Count messages per speaker
   type MemberType = NonNullable<typeof session.messages[0]['member']>
