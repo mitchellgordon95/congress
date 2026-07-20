@@ -24,7 +24,7 @@ Currently this repo is knowledge-base-only: the wiki, source cards, logs, and me
 
 These are Mitchell's standing positions. Don't relitigate them casually; if evidence challenges them, raise it explicitly as a challenge.
 
-1. *(None recorded yet — add Mitchell's standing design positions here as they surface.)*
+1. **Everything we publish must be grounded in citations to the primary record** (transcript, video, roll call, official statement), and grounding must be *checked* — multiple times, at multiple levels. A fun format never exempts a claim from having receipts. (Mitchell, 2026-07-20.)
 
 ## Voice-to-Text Note
 
