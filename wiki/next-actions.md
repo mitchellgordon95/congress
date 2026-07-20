@@ -4,9 +4,12 @@ Priority-ordered lanes. Mitchell's lane holds only actions that genuinely requir
 
 ## Mitchell's lane
 
-- [ ] Update Railway service root directory to `code/`.
-- [x] Move local `.env` to `code/.env` and run `npm install` in `code/` (done by Madison, 2026-07-20).
+- [ ] Decide: merge Outrage into this project or keep separate? (Blocked on Madison's Outrage analysis + landscape research.)
+- [ ] Pause/repoint the Railway service — the repo no longer contains an app, so its next deploy will fail.
+- [x] Move local `.env` to `code/.env` and run `npm install` in `code/` (done by Madison, 2026-07-20; moot after code nuke — `.env` with API keys now preserved at repo root, gitignored).
 
 ## Madison's lane
 
-*(empty)*
+- [ ] File landscape research as source cards; distill the gap analysis into `wiki/main.md`.
+- [ ] File Outrage repo analysis as a source card.
+- [ ] Draft a v2 product sketch once research lands and Mitchell reacts.

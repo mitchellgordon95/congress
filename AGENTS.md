@@ -14,11 +14,11 @@ If more than one person is listed here and it's not clear from context which one
 
 ## Project Context
 
-Congress Chat presents congressional floor proceedings in a group-chat format. Floor speeches from the Congressional Record become chat messages from House and Senate members, so reading a day's session feels like scrolling a group thread instead of parsing dense transcript text. An AI translation layer (Claude, via the Anthropic SDK) renders formal floor language in plain English.
+Congress Chat's mission: make it easy and fun to find out what's happening in Congress — and eventually state and local governments — by using AI to transform C-SPAN-like sources (floor proceedings, the Congressional Record, council meetings) into consumable form. The signature concept is a group-chat presentation: representatives as chat personas, notable activity pushed as bite-sized messages, votes shown with who voted how and why. See `vision.md` for strategy and `wiki/main.md` for current state.
 
-Data comes from the GovInfo and Congress.gov APIs: `code/src/lib/govinfo.ts` fetches Congressional Record transcripts, `code/src/lib/parser.ts` splits them into speaker turns, `code/src/lib/congress-api.ts` syncs member data, and `code/src/lib/translator.ts` does the plain-language pass. Processed sessions are stored via Prisma and served through a Next.js app (App Router) with pages for sessions, members, bills, and search.
+A v1 Next.js implementation was built and then removed on 2026-07-20 (Mitchell judged it a dubious first pass). It's recoverable from git history; `docs/ui_mocks.txt` preserves the UI thinking. Useful v1 facts: data came from the GovInfo API (Congressional Record transcripts) and the Congress.gov API (member data), with Claude doing plain-language translation. A related project, **Outrage** (`~/Desktop/outrage`, separate repo), covers the action side — identifying which representatives are responsible for a policy and contacting them — and may merge with this one.
 
-The repo is two things: the product code in `code/` (Next.js 16, React 19, Prisma, Tailwind 4, deployed on Railway) and this knowledge base — the wiki, source cards, logs, and meeting notes that make agents a durable thought partner on the project. See `vision.md` for strategy.
+Currently this repo is knowledge-base-only: the wiki, source cards, logs, and meeting notes that make agents a durable thought partner. When a rebuild starts, it goes in `code/`.
 
 ## Design Philosophy — Non-negotiables
 
@@ -126,7 +126,6 @@ congress/
 ├── log/              # Weekly activity logs (append-only)
 ├── meetings/         # Interviews & call notes
 │   └── template.md   # Format reference
-├── code/             # The Congress Chat app (Next.js) — build commands run here
 └── .claude/          # Skills, agents, hooks (Claude Code config)
 ```
 
@@ -166,8 +165,7 @@ Keep this section current as the wiki grows.
 - `wiki/main.md` — Master article: project state, key positions, open questions, TODOs.
 - `wiki/next-actions.md` — Priority-ordered lanes for Mitchell and Madison.
 - `vision.md` — Vision & strategy.
-- `docs/ui_mocks.txt` — Text mockups of the UI the current implementation follows.
-- `code/CLAUDE.md` — Technical docs for the app (stack, commands, env).
+- `docs/ui_mocks.txt` — Text mockups of the chat UI concept (kept from v1).
 
 ## The Pattern in Practice
 
