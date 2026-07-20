@@ -23,7 +23,7 @@ Make it easy and fun to find out what's happening in Congress via C-SPAN-like so
 
 - **Chat thread with representatives as personas.** When stuff happens you get *pushed* a message, e.g. "Senator X talked for an hour about expanding the military." Click through for a bite-sized breakdown of what was actually said, compressed into easy chat messages. (This was the v1 concept too — see `docs/ui_mocks.txt`.)
 - **Votes with the why.** When a bill gets voted on: who voted yes, who voted no, and *why* they voted that way.
-- **Merge with Outrage?** Mitchell's other project (`~/Desktop/outrage`) helps people figure out which representatives are responsible for a policy change they want, then draft and send messages / make calls. It's functional but has no user-acquisition story. Possible merge into one umbrella: "using AI to improve civic participation." (Tentative — Mitchell's phrasing was "maybe.")
+- **Merge with Outrage?** Mitchell's other project (`~/Desktop/outrage`) helps people figure out which representatives are responsible for a policy change they want, then draft and send messages / make calls. It's functional but has no user-acquisition story. Possible merge into one umbrella: "using AI to improve civic participation." (Tentative — Mitchell's phrasing was "maybe.") Analysis: [`sources/outrage-repo-analysis.md`](../sources/outrage-repo-analysis.md) — more shipped than "kind of works": active through Jan 2026, real users, and its Cicero rep-lookup already covers federal/state/**local** officials. Email/webform only; no calling despite the framing. *(Agent note, 2026-07-20.)*
 - **Local governments too.** Start with the U.S. Congress, but the same treatment for state/city governments is interesting — see what they're doing, subscribe to alerts on certain topics.
 
 ## Open Questions
@@ -39,7 +39,7 @@ Make it easy and fun to find out what's happening in Congress via C-SPAN-like so
 ## TODOs
 
 - [ ] File landscape-research findings as source cards and update Open Questions.
-- [ ] File Outrage repo analysis as a source card; decide merge vs. separate.
+- [x] File Outrage repo analysis as a source card: [`sources/outrage-repo-analysis.md`](../sources/outrage-repo-analysis.md) (2026-07-20). Merge-vs-separate decision still open (Mitchell).
 - [ ] Rewrite `vision.md` once the merge question and beachhead are settled.
 - [ ] Mitchell: Railway service still points at this repo; deployment target for any rebuild is TBD (the old service will now fail to build — consider pausing it).
 - [x] Bootstrap knowledge-base structure (2026-07-20).
