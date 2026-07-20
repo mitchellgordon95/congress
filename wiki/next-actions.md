@@ -10,6 +10,6 @@ Priority-ordered lanes. Mitchell's lane holds only actions that genuinely requir
 
 ## Madison's lane
 
-- [ ] File landscape research as source cards; distill the gap analysis into `wiki/main.md`.
+- [x] File landscape research as source cards; distill the gap analysis into `wiki/main.md` (2026-07-20).
 - [x] File Outrage repo analysis as a source card (`sources/outrage-repo-analysis.md`, 2026-07-20).
 - [ ] Draft a v2 product sketch once research lands and Mitchell reacts.

@@ -6,7 +6,7 @@ The master wiki article. Agent-maintained; see `AGENTS.md` for the rules that go
 
 - **v1 code nuked** (Mitchell's call, 2026-07-20: "a dubious first pass"). Recoverable from git history. The mission is unchanged; a rebuild will be informed by the brainstorm below and the landscape research.
 - Repo is currently knowledge-base-only. `docs/ui_mocks.txt` (the chat-UI mockups) was deliberately kept.
-- Landscape research on existing civic-tech projects and an analysis of the Outrage repo are in progress (2026-07-20); findings will be filed in `sources/`.
+- Both research tasks are filed: [`sources/outrage-repo-analysis.md`](../sources/outrage-repo-analysis.md) and [`sources/civic-tech-landscape-2026.md`](../sources/civic-tech-landscape-2026.md). See "Landscape" below.
 
 ## Mission
 
@@ -26,9 +26,13 @@ Make it easy and fun to find out what's happening in Congress via C-SPAN-like so
 - **Merge with Outrage?** Mitchell's other project (`~/Desktop/outrage`) helps people figure out which representatives are responsible for a policy change they want, then draft and send messages / make calls. It's functional but has no user-acquisition story. Possible merge into one umbrella: "using AI to improve civic participation." (Tentative — Mitchell's phrasing was "maybe.") Analysis: [`sources/outrage-repo-analysis.md`](../sources/outrage-repo-analysis.md) — more shipped than "kind of works": active through Jan 2026, real users, and its Cicero rep-lookup already covers federal/state/**local** officials. Email/webform only; no calling despite the framing. *(Agent note, 2026-07-20.)*
 - **Local governments too.** Start with the U.S. Congress, but the same treatment for state/city governments is interesting — see what they're doing, subscribe to alerts on certain topics.
 
+## Landscape (as of 2026-07)
+
+*(Agent analysis, from [`sources/civic-tech-landscape-2026.md`](../sources/civic-tech-landscape-2026.md).)* Four genuine gaps: (1) federal **proceedings** summarization for lay audiences — bill-text explainers are crowded, floor/hearing coverage is unserved; (2) the **group-chat persona format** — nobody does it anywhere; (3) **votes-with-why** — empty since ProPublica Represent died in 2024; (4) the **full loop** (notable moment → push → contact the responsible rep) — pieces exist (5 Calls, Resistbot, GovTrack trackers, citymeetings-class summarizers) but nobody chains them. Counterweight: **local**-meeting summarization is the crowded category (citymeetings.nyc, Aware/Sundays.news, SeeGov), and CRS's <3%-accuracy finding on AI bill summaries means faithfulness needs a human-in-the-loop story.
+
 ## Open Questions
 
-- Who else is already doing this well, and where are the real gaps? **In progress** — landscape research running 2026-07-20.
+- [x] Who else is already doing this well, and where are the real gaps? **Answered 2026-07-20** — see Landscape section above.
 - Merge Outrage into this project, or keep them separate with links between them? **TBD**
 - What is the beachhead audience — who reads Congress Chat first? **TBD**
 - Consumption model: destination website vs. push-first (alerts, feeds, maybe distribution on existing platforms)? Mitchell's brainstorm leans push. **TBD**
@@ -38,7 +42,7 @@ Make it easy and fun to find out what's happening in Congress via C-SPAN-like so
 
 ## TODOs
 
-- [ ] File landscape-research findings as source cards and update Open Questions.
+- [x] File landscape-research findings as source cards and update Open Questions ([`sources/civic-tech-landscape-2026.md`](../sources/civic-tech-landscape-2026.md), 2026-07-20).
 - [x] File Outrage repo analysis as a source card: [`sources/outrage-repo-analysis.md`](../sources/outrage-repo-analysis.md) (2026-07-20). Merge-vs-separate decision still open (Mitchell).
 - [ ] Rewrite `vision.md` once the merge question and beachhead are settled.
 - [ ] Mitchell: Railway service still points at this repo; deployment target for any rebuild is TBD (the old service will now fail to build — consider pausing it).
