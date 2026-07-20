@@ -21,7 +21,7 @@ The master wiki article. Agent-maintained; see `AGENTS.md` for the rules that go
 
 ## TODOs
 
-- [ ] Mitchell: move the local `.env` into `code/.env` and reinstall dependencies in `code/` after the restructure lands.
+- [x] Mitchell: move the local `.env` into `code/.env` and reinstall dependencies in `code/` after the restructure lands. *(Done by Madison, 2026-07-20.)*
 - [ ] Mitchell: update the Railway service root directory to `code/` so deploys keep working.
 - [ ] Fill in `vision.md` problem/beachhead/hypotheses sections.
 - [ ] Record the first non-negotiables in `AGENTS.md` Design Philosophy.

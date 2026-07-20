@@ -4,8 +4,8 @@ Priority-ordered lanes. Mitchell's lane holds only actions that genuinely requir
 
 ## Mitchell's lane
 
-- [ ] Move local `.env` to `code/.env` and run `npm install` in `code/` (post-restructure).
 - [ ] Update Railway service root directory to `code/`.
+- [x] Move local `.env` to `code/.env` and run `npm install` in `code/` (done by Madison, 2026-07-20).
 
 ## Madison's lane
 
