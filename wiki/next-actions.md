@@ -12,5 +12,5 @@ Priority-ordered lanes. Mitchell's lane holds only actions that genuinely requir
 
 - [x] File landscape research as source cards; distill the gap analysis into `wiki/main.md` (2026-07-20).
 - [x] File Outrage repo analysis as a source card (`sources/outrage-repo-analysis.md`, 2026-07-20).
-- [ ] File the local-summarizer teardown (citymeetings / Aware / SeeGov) as a source card when it lands.
+- [x] File the local-summarizer teardown as a source card (`sources/local-summarizer-teardown-2026.md`, 2026-07-20).
 - [ ] Draft a v2 product sketch: committee-first ingestion, chat personas (broadcast + query), citation-grounding pipeline.

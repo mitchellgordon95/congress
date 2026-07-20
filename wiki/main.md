@@ -44,7 +44,7 @@ Make it easy and fun to find out what's happening in Congress via C-SPAN-like so
 - What does the multi-level citation-checking pipeline concretely look like (per Design Philosophy #1)? **TBD**
 - Persona Q&A design tension *(agent, 2026-07-20)*: does the persona answer in first person as the member, or as a clearly-labeled AI digest of their record? First-person is more fun but risks (mis)impersonating a real, living person; labeling and strict grounding are the mitigations. **TBD**
 - Committee data plumbing *(agent, 2026-07-20)*: official hearing transcripts (GovInfo CHRG) lag weeks-to-months; near-real-time likely means committee video/ASR. What's the freshness requirement? **TBD**
-- Are the existing local summarizers actually good, or beatable "2022-era summarization"? **In progress** — teardown running 2026-07-20.
+- [x] Are the existing local summarizers actually good, or beatable "2022-era summarization"? **Answered 2026-07-20** — split verdict: citymeetings.nyc's grounding UX is state-of-the-art (emulate it); Aware/Sundays is beatable, citation-light scale; SeeGov is B2B curation, not a competitor. Nobody combines grounding with chat Q&A or offers topic-level push. See [`sources/local-summarizer-teardown-2026.md`](../sources/local-summarizer-teardown-2026.md).
 - Local government: which city/state first, when the time comes? **TBD** (Congress is the test bed first — Mitchell, 2026-07-20.)
 
 ## TODOs
