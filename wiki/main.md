@@ -22,6 +22,7 @@ Make it easy and fun to find out what's happening in Congress via C-SPAN-like so
 - **(Mitchell, 2026-07-20)** **Citation grounding is non-negotiable.** Everything published must be grounded in citations, with checks at multiple levels. (Promoted to AGENTS.md Design Philosophy #1.)
 - **(Mitchell, 2026-07-20)** Congress is the test bed; local government may be the better long-term target, but we have to test and iterate somewhere, and Congress first is probably right.
 - **(Mitchell, 2026-07-20)** Content strategy (e.g., "maybe we're making a TikTok channel") is deferred — fine either way, decide later.
+- **(Mitchell, 2026-07-20)** **Distinguish outcomes from agreement/dissent.** "What was decided" and "what were the arguments" are different things and the product should treat them as separate layers, not blur them into one summary. *(Agent note: they also differ in data and risk — outcomes are structured and objectively groundable (roll calls, markup results, amendment dispositions); arguments live in transcript speech, where faithful characterization of each side's position is the hard, high-stakes summarization problem. Outcomes are natural push-notification material; the argument layer is the natural chat-thread material, and it's where "votes-with-why" and the persona Q&A live.)*
 
 ## Product Ideas (brainstorm, Mitchell, 2026-07-20, via voice)
 
