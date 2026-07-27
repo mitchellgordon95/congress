@@ -50,6 +50,8 @@ Make it easy and fun to find out what's happening in Congress via C-SPAN-like so
 
 ## TODOs
 
+Priority-ordered view with Mitchell's and Madison's lanes: [`next-actions.md`](next-actions.md).
+
 - [x] File landscape-research findings as source cards and update Open Questions ([`sources/civic-tech-landscape-2026.md`](../sources/civic-tech-landscape-2026.md), 2026-07-20).
 - [x] File Outrage repo analysis as a source card: [`sources/outrage-repo-analysis.md`](../sources/outrage-repo-analysis.md) (2026-07-20). Merge-vs-separate decision still open (Mitchell).
 - [ ] Rewrite `vision.md` once the merge question and beachhead are settled.
