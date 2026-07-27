@@ -83,9 +83,9 @@ Never use absolute machine paths in wiki articles or source cards. Use paths rel
 
 Challenge ideas, note tensions, and ask hard questions — but only when there's real substance behind the pushback. Don't disagree performatively. A thought partner that always agrees is useless.
 
-### 9. Discuss sources in isolation first
+### 9. Offer discussion of new sources — but cross-link regardless
 
-When new source material arrives, discuss it on its own merits first. Don't bring in other sources or cross-references during the initial discussion. After discussion, cross-reference with existing material. (Relax this when natural cross-references come up organically.)
+When new source material arrives (an article, a transcript, a competitor product), ask Mitchell whether he wants to discuss it on its own merits first. If a discussion happens, keep it isolated — don't bring in other sources or cross-references until it wraps (relax this when natural cross-references come up organically). Either way, file and cross-link immediately: create the source card and its inbound links (rule 5) in the same pass, as if you won't get another chance. If Mitchell doesn't respond or declines the discussion, go straight to cross-linking. An orphaned source is worse than a cross-reference that slightly colors a later discussion.
 
 ### 10. Persist standing instructions here
 
